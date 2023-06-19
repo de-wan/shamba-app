@@ -1,0 +1,114 @@
+- [x] Login Admin
+- [ ] Admin Dashboard
+  - [ ] Navigation Menu
+    - [x] Dashboard
+    - [ ] Wallet
+    - [x] Farmers
+    - [x] Collections
+    - [ ] Livestock
+    - [ ] Reports
+    - [ ] Profile
+  - [x] Farmers vs Livestock chart
+  - [x] Male vs Female pie chart
+  - [x] Vet Schedules
+  - [x] Collections bar chart
+- [x] Farmer Module
+  - [x] Farmer Submodule
+    - [x] Add Farmer form should contain: Name, *UserName??*, Email, Gender, Date of Birth(Above 18), ID Number, country, address, route, bank, bank branch, account no, products they produce, and farm size.
+    - [x] View Farmer table should contain: Search field, Name, Gender, Farmer’s Cooperative Number(Auto Generated), address, route, products they produce, and farm size. On Click you should be able to see each farmer’s details(including products they produce, loans they’ve taken from the cooperative and payments made to the farmer) and edit them.
+  - [x] Route Submodule
+    - [x] Add route’s form that should contain: Name for the cooperative route(this is where all the collections are made)
+    - [x] View routes table that shows all cooperative routes and ability to edit and/or delete route
+    - [ ] View routes should contain Route, *Branch In-Charge?*, No of Farmers
+- [] Product Module
+  - [] Product Sub Module
+    - [] Add product form: Name, Buying price, Selling price(should be calculated inclusive of VAT), product serial number, Unit of Measure(Should be a dropdown of kgs, litres, per item and ability to add other units of measure not present on the dropdown), Category(A dropdown containing Animal products, cereals, fruits and ability to add a product category).
+   - [] View Product table: Search product field, Name, Buying price, Selling price(should be calculated inclusive of VAT), product serial number, Unit of Measure, category, and quantity available(reduces based on sales or if the product is used as raw material).
+  - [] Supplier Sub Module
+    - [] View suppliers table: Farmers’ names, route, farmer’s cooperative number, farmer’s ID, and view products button. View Products a farmer produces popup should contain:Name of product, category of product, serial number of product, units of measure, and pending payments(summation of all cost of collections made from the date of last payment).
+- [] Bank/Wallet. Add and view banks and branches.
+  - [] The wallet dashboard contains a pie chart of income vs expenses, Expenses, Income, Total Amount, Transfers, Reports, TopUp, and Recent Transactions.
+  - [x] Bank Submodule
+    - [x] Add Bank form should contain: Name of Bank, Contact No, Swift Code.
+    - [x] View Branch/ add branch form should contain: Route, Name of Branch, Address and Branch Code.
+    - [x] View Bank table should contain: Search bank, Name of Bank, Contact No, Swift Code and Button to View Bank Branches.
+  - [x] Wallet Submodule
+    - [x] Pending payments:
+        - [x] Total amount of pending payment. On click, it should show you Farmer name, Farmer Number, Total Pending Payment,Reason for Payment, Quantity of Unpaid Product, Date of Last Payment.
+    - [x] Completed Payments: Total amount of completed payment. On click, you should see a list of all completed transaction, Name of farmer, farmer number, date of payment, and amount paid.
+    - [x] Loans to Farmers. One can view a list of all farmers with loans. On click, it should show: Farmer Name, Farmer Number, Loaned Amount, Number of Installments, Current Balance, Amount Paid, Total Interests.
+- [] Extension Services
+  - [] Livestock/Diseases Management
+    - [] Livestock sub-module: Should contain Farmer’s Name, Farmer’s Number, Cattle Breed(Dairy or Beef),Number of Cattle, Product from cattle(e.g milk), Quantity produced(weekly). A search input field
+    - [] Disease sub-module
+      - [x] View Should contain Disease name, Disease category(Contagious, mild, fatal, virus), Attacks what, Last time the disease was reported, Which route the disease was reported. Report a disease button.
+      - [] When the user clicks reports disease they should be redirected to book vet present in their route.
+    - [] Vet Management module
+      - [] Services sub-module: Vet services (e.g vaccination, artificial insemination) and vet items needed (e.g syringes) and the cost of the items.
+      - [] Vets and Booking sub-module: Should contain Name of Vet, Phone Number, Email address of Vet, gender, route, and View Bookings button.
+      - [] View/Add Booking should contain: Farmer Name, location, Date and Time of Booking, Duration of Vets visit, and Booking details(Why you need a vet).Can edit and delete a booking.
+    - [] Reports. Should include reports for Sales, transactions, and collections (generate in PDF)
+    - [] Manufacturing module: Final Product sub-module should contain: Final product name, raw material, selling price per item, profit per item, units for final product name and quantity available(reduces based on the number of sales made on that final product).
+    - [] Sales for the final products: Should have a table containing, Product being sold, buyer type(can be external customer or farmers on the system), buyer name,seller type(cooperative or farmer), seller of the product, quantity bought, total amount(automated (quantity bought * selling price/item)- discount), discount, date , mode of payment(Cash, Bank Transfer, Mobile Transfer(M-Pesa)), Transaction Number.
+    - [] Collections. (Add and view collections). Ensure traceability from the farmer to collections to the final product.
+      - [] Collections summary:Routes collected( per day), active farmers(view farmers), product collected(all collected produce in a particular time).
+      - [] View/Add collections table: Should contain batch number, Farmer Name, Farmer Number, Produce, Quantity collected, Total amount(automated (quantity collected * price during collection/item)), Date of collection(automated to be that current day), Agent present during a collection. Add Edit and Delete functionality on a collection.
+      - [] An alert system to notify the farmers of upcoming events(sent to farmers emails and as notifications on the farmers side of the app)
+    - [] Ability to manage permissions. SuperUser, Vet, and extensions officers should access different modules on the system
+    - [] Insurance Management: The cooperative will partner with insurance service providers to provide insurance services to farmers.
+      - [] The insurance covers: Farmer and Family(tier 1), Farmer and Family and Pension Scheme(tier 2),Farmer and Family, Pension Scheme, Livestock or Harvest Insurance(tier 3),  Farmer and Family, Pension Scheme, Livestock and Harvest Insurance(tier 4).
+      - [] The insurance should be paid: Annually, Semi-Annually, and Quarterly.
+- [ ] Communication/Chat to Farmers
+
+
+## Farmers side
+- [ ] Free login/Register as a farmer
+- [ ] Dashboard
+  - [ ] Weekly product collections graph.
+  - [ ] Services such as vet schedules, wallet, reports
+  - [ ] A bottom menu containing home, wallet, collections/products, livestock, reports, profile
+- [ ] Product/ Collection
+  - **Needs fields and views clarity**
+- [ ] Bank/ Wallet
+  - **Needs fields and views clarity**
+  - [ ] Dashboard
+    - [ ] Show Expenses and Income
+    - [ ] Money topup ability
+    - [ ] transfer from mobile to e-wallet
+    - [ ] Can make payments
+    - [ ] Can view transactions
+    - [ ] Can See total Expenses, Income and Total Amounts
+- [ ] Loan Module
+  - [ ] Borrow
+  - [ ] Repay
+  - [ ] Loan Balance
+  - [ ] Installments
+  - [ ] Top up
+  - [ ] Generate Reports
+- [ ] Vet Schedule Module
+  - [x] Book a vet
+  - [x] Cancel a booking
+  - [ ] Change booking time
+  - [x] Reason for visiting
+  - [ ] Book a training: Date, time, extension officer
+- [ ] Management Module
+  - [ ] Livestock and Disease Management
+  - [ ] Product Management (Add, delete, edit product)
+  - [ ] Farm Management (Farm Acreage, Farm Inputs, and Tools, Farm Leasing)
+- [ ] Reporting Module
+  - [ ] Collection
+  - [ ] Transactions
+  - [ ] Loans
+  - [ ] Sales
+  - [ ] Product Reports
+  - [ ] Account Statements
+- [ ] Communication/Chat to Admin
+- [ ] **Sales ??**
+- [ ] Marketplace Module
+  - [ ] Buy  (Farm Inputs, feeds, materials)
+  - [ ] Lock Produce
+  - [ ] List items for sale
+  - [ ] List animal for sale ( Type of animal e.g cow, breed, price, location, contact)
+  - [ ] Buy Livestock
+- [ ] Insurance Management Module
+  - [ ] Claims form

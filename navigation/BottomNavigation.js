@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Collections from '../components/admin/collections';
 import Dashboard from '../components/admin/dashboard/Dashboard';
-import Farmers from '../components/admin/farmers/Farmers';
+import Farmers from '../components/admin/FarmersModule/Farmers';
 import Wallet from '../components/admin/wallet/Wallet';
 
 const Tab = createBottomTabNavigator();
