@@ -39,7 +39,7 @@ const Routes = () => {
   useEffect(() => {
     fetchToken();
   }, []);
-  useEffect(() => {
+  /* useEffect(() => {
     const fetchRoutes = async () => {
       fetchToken();
       // todo: change the url to the correct one
@@ -81,7 +81,7 @@ const Routes = () => {
         .catch(err => console.log(`err: ${err}`));
     };
     fetchRoutes();
-  }, [token]);
+  }, [token]); */
 
   const triggerDelete = id => {
     Alert.alert(

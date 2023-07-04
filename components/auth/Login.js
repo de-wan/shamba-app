@@ -1,183 +1,193 @@
-import React from 'react';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
-  StyleSheet,
-  ScrollView,
-  View,
   Text,
-  TextInput,
-  TouchableOpacity,
+  View,
+  ScrollView,
   Image,
-  Dimensions,
+  StyleSheet,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { ThemeContext } from '../../context/ThemeContext';
 import { AuthContext } from '../../context/AuthContext';
+import ShambaInput from '../ui/ShambaInput';
+import ShambaButton from '../ui/ShambaButton';
 
-function Login() {
-  const navigation = useNavigation();
-  const { isLoading, login, message } = useContext(AuthContext);
-  const [email, setEmail] = useState('onceincltd@gmail.com');
+const Login = ({ moveToRegister }) => {
+  const theme = useContext(ThemeContext);
+  const { isLoading, login, message, messageType } = useContext(AuthContext);
+
+  const styles = StyleSheet.create({
+    auth: {
+      backgroundColor: theme.app_bg,
+      padding: 20,
+      position: 'relative',
+    },
+    image: {
+      flex: 1,
+      paddingVertical: 55,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      position: 'absolute',
+      height: 200,
+      width: 200,
+    },
+    topImgWrap: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    topImg: {
+      width: 200,
+      height: 140,
+      marginTop: 10,
+      resizeMode: 'contain',
+    },
+    title: {
+      fontSize: 24,
+      fontWeight: '600',
+      paddingBottom: 5,
+      marginBottom: 10,
+      color: theme.gray1,
+      textAlign: 'center',
+    },
+    formMessage: {
+      color: theme.gray1,
+      fontWeight: 'bold',
+      fontSize: 16,
+      textAlign: 'center',
+    },
+    primaryText: {
+      color: theme.primary,
+    },
+    dangerText: {
+      color: theme.danger,
+    },
+    btn: {
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 5,
+      marginHorizontal: 2,
+      flexDirection: 'row',
+      borderRadius: 10,
+    },
+    primaryBtn: {
+      backgroundColor: theme.primary,
+      borderWidth: 2,
+      borderColor: theme.inverted,
+    },
+    primaryBtnText: {
+      color: theme.wb_color,
+    },
+    registerLinkWrap: {
+      width: '90%',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      paddingVertical: 10,
+      alignItems: 'center',
+    },
+    registerLink: {
+      // underline
+      textDecorationLine: 'underline',
+      marginLeft: 5,
+      borderWidth: 1,
+      borderColor: theme.primary,
+      borderRadius: 5,
+      paddingHorizontal: 5,
+      paddingVertical: 2,
+    },
+    registerLinkText: {
+      textDecorationLine: 'underline',
+      color: theme.primary,
+    },
+    grayText: {
+      color: theme.gray1,
+    },
+  });
+
+  const [localMessage, setLocalMessage] = useState('');
+  const [email, setEmail] = useState('naomi@admin.com');
   const [password, setPassword] = useState('admin@123');
-  console.log(message);
-  const submitLogin = async e => {
-    e.preventDefault();
-
+  const submitLogin = () => {
+    setLocalMessage('');
     if (email && password) {
-      await login(email, password);
+      login(email, password);
+    } else {
+      setLocalMessage('Please fill all fields');
     }
   };
 
-  return (
-    <ScrollView style={styles.container}>
-      <View style={styles.loginContainer}>
-        <View style={styles.subLoginContainer}>
-          <Image
-            style={{
-              width: 100,
-              height: 70,
-              marginTop: 10,
-              resizeMode: 'contain',
-            }}
-            source={require('../../assets/images/logo1.png')}
-          />
-          <Text style={styles.title}>Sign In</Text>
-          <Text style={{ color: '#E55451', fontWeight: 'bold', fontSize: 16 }}>
-            {message}
-          </Text>
-          {isLoading && <ActivityIndicator size={'large'} color={'#000'} />}
-          <View style={{ width: '90%', height: 80, marginBottom: 20 }}>
-            <Text>Email Address</Text>
-            <TextInput
-              style={styles.inputField}
-              placeholder="name@gmail.com"
-              keyboardType="email-address"
-              value={email}
-              onChangeText={email => setEmail(email)}
-            />
-          </View>
-          <View style={{ width: '90%', height: 80, marginBottom: 20 }}>
-            <Text>Password</Text>
-            <TextInput
-              style={styles.inputField}
-              placeholder="Enter password"
-              textContentType="password"
-              secureTextEntry={true}
-              value={password}
-              onChangeText={password => setPassword(password)}
-            />
-          </View>
-          <View
-            style={{
-              width: '90%',
-              height: 140,
-              justifyContent: 'space-between',
-              marginVertical: 20,
-            }}>
-            <TouchableOpacity
-              onPress={e => submitLogin(e)}
-              id="submitBtn"
-              style={styles.button}>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  color: '#fff',
-                  fontWeight: 'bold',
-                  fontSize: 16,
-                  paddingTop: 15,
-                }}>
-                Log In
-              </Text>
-            </TouchableOpacity>
-            <Text style={{ textAlign: 'center' }}>Don't have an account? </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Register')}
-              style={styles.button}>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  color: '#fff',
-                  fontWeight: 'bold',
-                  fontSize: 16,
-                  paddingTop: 15,
-                }}>
-                Go to Register
-              </Text>
-            </TouchableOpacity>
+  /* const styles = Stylesheet.create({
+    auth: {
+      backgroundColor: theme.app_bg,
+      padding: 20,
+    },
+    topImgWrap: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    topImg: {
+      width: 200,
+      height: 140,
+      marginTop: 10,
+      resizeMode: 'contain',
+    },
+  }); */
 
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Login1')}
-              style={styles.nextUiButton}>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  color: '#fff',
-                  fontWeight: 'bold',
-                  fontSize: 16,
-                  paddingTop: 15,
-                }}>
-                Next UI
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+  return (
+    <ScrollView style={styles.auth}>
+      <View style={styles.topImgWrap}>
+        <Image
+          style={styles.topImg}
+          source={require('../../assets/images/logo1.png')}
+        />
       </View>
+      <Text style={styles.title}>Sign In</Text>
+
+      {message && messageType === 'success' && (
+        <Text style={[styles.formMessage, styles.primaryText]}>{message}</Text>
+      )}
+      {message && messageType === 'error' && (
+        <Text style={[styles.formMessage, styles.dangerText]}>{message}</Text>
+      )}
+
+      {localMessage && (
+        <Text style={[styles.formMessage, styles.dangerText]}>
+          {localMessage}
+        </Text>
+      )}
+      {isLoading && <ActivityIndicator size={'large'} color={theme.primary} />}
+      <ShambaInput
+        label="Email Address"
+        placeholder="name@gmail.com"
+        inputType="email"
+        value={email}
+        onChangeText={value => setEmail(value)}
+      />
+      <ShambaInput
+        label="Password"
+        placeholder="name@gmail.com"
+        value={password}
+        onChangeText={value => setEmail(value)}
+        secureTextEntry={true}
+      />
+      <View style={styles.registerLinkWrap}>
+        <Text style={styles.grayText}>No Account?</Text>
+        <TouchableOpacity
+          style={styles.registerLink}
+          onPress={() => {
+            moveToRegister && moveToRegister();
+          }}>
+          <Text style={styles.registerLinkText}>Register</Text>
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity
+        style={[styles.btn, styles.primaryBtn]}
+        onPress={() => submitLogin()}>
+        <Text style={styles.primaryBtnText}>Login</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
-}
+};
 
 export default Login;
-const { width, height } = Dimensions.get('window');
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#3CB371',
-  },
-  loginContainer: {
-    flex: 1,
-    width: width,
-    height: height,
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingTop: 100,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    paddingBottom: 5,
-    borderBottomWidth: 1,
-    marginBottom: 10,
-  },
-  subLoginContainer: {
-    width: '85%',
-    height: '80%',
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderRadius: 10,
-  },
-  button: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#3CB371',
-    borderRadius: 20,
-  },
-  nextUiButton: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#3CB371',
-    borderRadius: 20,
-    borderColor: '#fff',
-    borderWidth: 1,
-    borderStyle: 'solid',
-  },
-  inputField: {
-    width: '100%',
-    height: 45,
-    textAlign: 'left',
-    padding: 10,
-    marginTop: 20,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#000',
-  },
-});

@@ -10,9 +10,11 @@ export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState('');
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
 
   const login = (email, password) => {
     setIsLoading(true);
+    setMessage('');
     fetch('https://erp.shambarecords.com/api/v1/login', {
       method: 'POST',
       headers: {
@@ -25,6 +27,7 @@ export const AuthProvider = ({ children }) => {
       .then(data => {
         setIsLoading(false);
         if (data.success === true) {
+          setMessageType('success');
           setMessage(data.message);
           setRole(data.data.user.role);
           setUserToken(data.data.token);
@@ -48,13 +51,18 @@ export const AuthProvider = ({ children }) => {
           AsyncStorage.setItem('@storage_Key', jsonValue);
         }
         if (data.success === false && data.data === null) {
+          setMessageType('error');
           setMessage(data.message);
         }
         if (data.success === false && data.data.errors.length !== 0) {
+          setMessageType('error');
           setMessage(data.data.errors[0]);
         }
       })
-      .catch(err => console.log(`err: ${err}`));
+      .catch(err => {
+        console.log(`err: ${err}`);
+        setIsLoading(false);
+      });
   };
 
   const logout = () => {
@@ -63,7 +71,18 @@ export const AuthProvider = ({ children }) => {
   };
   return (
     <AuthContext.Provider
-      value={{ login, logout, isLoading, userToken, role, name, id, message }}>
+      value={{
+        login,
+        logout,
+        isLoading,
+        userToken,
+        role,
+        setRole,
+        name,
+        id,
+        message,
+        messageType,
+      }}>
       {children}
     </AuthContext.Provider>
   );

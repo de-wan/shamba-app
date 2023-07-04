@@ -8,7 +8,7 @@ import Farmers from '../components/admin/FarmersModule/Farmers';
 import Wallet from '../components/admin/wallet/Wallet';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 function HomeNavigator() {
     return (
