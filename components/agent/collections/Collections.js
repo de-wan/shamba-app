@@ -6,6 +6,8 @@ import ShambaButton from '../../ui/ShambaButton';
 import DropdownMenu from '../../ui/DropdownMenu';
 import DateFilterDropdown from '../../ui/DateFilterDropdown';
 import ChipFilterDropdown from '../../ui/ChipFilterDropdown';
+import ShambaModal from '../../ui/ShambaModal';
+import AddCollection from './AddCollection';
 
 const Collections = () => {
   const theme = useContext(ThemeContext);
@@ -73,6 +75,8 @@ const Collections = () => {
   const [routeFilter, setRouteFilter] = useState('All Routes');
   const [farmerFilter, setFarmerFilter] = useState('All Farmers');
   const [productFilter, setProductFilter] = useState('Products');
+
+  const [isAddingCollection, setIsAddingCollection] = useState(false);
 
   const collections = [
     {
@@ -159,7 +163,12 @@ const Collections = () => {
         </View>
       )}
       <View style={styles.actionsBar}>
-        <ShambaButton text="Add Collection" onPress={() => {}} />
+        <ShambaButton
+          text="Add Collection"
+          onPress={() => {
+            setIsAddingCollection(true);
+          }}
+        />
       </View>
 
       {collections.map(collection => (
@@ -184,6 +193,16 @@ const Collections = () => {
           </View>
         </View>
       ))}
+
+      {/* Add Collection Modal */}
+      <ShambaModal
+        visible={isAddingCollection}
+        title="ADD COLLECTION"
+        onRequestClose={() => {
+          setIsAddingCollection(false);
+        }}>
+        <AddCollection />
+      </ShambaModal>
     </View>
   );
 };
